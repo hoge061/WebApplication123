@@ -1,0 +1,162 @@
+@model Wing1.Models.ViewKintaiModel
+
+@{
+    ViewData["Title"] = "編集";
+    @using Newtonsoft.Json
+}
+<style>
+    .form-control{
+        width: 200px;
+    }
+    span{
+        margin-top:7px
+    }
+    .form1{
+        margin-bottom: 10px;
+    }
+    .btn2{
+        border-color:#FF3300;
+        background-color: #FF3333;
+    }
+    .btn2:hover{
+        background-color: rgb(225, 8, 8);
+        border-color: rgb(225, 8, 8);
+    }
+    .btn3{
+        border-color:#9acd32;
+        background-color: #96cf23;
+    }
+    .btn3:hover{
+        border-color:#9acd32;
+        background-color: #719627;
+    }
+    #text1{
+        width: 465px;
+        margin-left: -5px;
+    }
+    .biko{
+        margin-bottom: 10px;
+    }
+</style>
+@* こんにちは、@Html.DisplayFor(model => model.Users.Userid)さん *@
+@ViewBag.date.ToString().Substring(0,4)年 @ViewBag.date.ToString().Substring(5,2)月
+@ViewBag.date.ToString().Substring(8,2)日
+<form asp-action="Edit">
+    <input type="hidden" asp-for="Kintai.Userid" value="@ViewBag.id"/>
+    <input type="hidden" asp-for="Kintai.Date" value="@ViewBag.date"/>
+
+    <div style="display: flex;" class="form1">
+    <span>勤務形態　：</span>
+    <div class="form-group">
+        <select asp-for="Kintai.Workstyle" asp-items="Kintai.WorkstyleList" class="form-control"></select>
+    </div>
+    </div>
+    <div style="display: flex;" class="form1">
+        <span>勤務時間　：</span>
+        <input asp-for="Kintai.Starttime" class="form-control form1a formAll" step= "900"/><span>～</span>
+        <input asp-for="Kintai.Endtime" class="form-control form1a formAll" step= "900"/>
+        <input type="button" value="クリア" onclick="clearText1()" />
+    </div>
+
+    <div style="display: flex;" class="form1">
+        <span>休憩時間①：</span>
+        <input asp-for="Kintai.Break1start" class="form-control form1b formAll" step= "300"/><span>～</span>
+        <input asp-for="Kintai.Break1end" class="form-control form1b formAll" step= "300"/>
+        <input type="button" value="クリア" onclick="clearText2()" />
+    </div>
+
+    <div style="display: flex;" class="form1">
+        <span>休憩時間②：</span>
+        <input asp-for="Kintai.Break2start" class="form-control form1c formAll" step= "300"/><span>～</span>
+        <input asp-for="Kintai.Break2end" class="form-control form1c formAll" step= "300"/>
+        <input type="button" value="クリア" onclick="clearText3()" />
+    </div>    
+
+    <div style="display: flex;" class="form1">
+        <span>休憩時間③：</span>
+        <input asp-for="Kintai.Break3start" class="form-control form1d formAll" step= "300"/><span>～</span>
+        <input asp-for="Kintai.Break3end" class="form-control form1d formAll" step= "300"/>
+        <input type="button" value="クリア" onclick="clearText4()" />
+    </div> 
+
+    <div style="display: flex;" class="form1">
+        <span>休憩時間④：</span>
+        <input asp-for="Kintai.Break4start" class="form-control form1e formAll" step= "300"/><span>～</span>
+        <input asp-for="Kintai.Break4end" class="form-control form1e formAll" step= "300"/>
+        <input type="button" value="クリア" onclick="clearText5()" />
+    </div>
+    
+    <span id="biko1" class="biko">備考　　　：</span>
+    <input type="text" asp-for="Kintai.biko" id="text1" class="biko">
+    <br>
+
+
+    <input type="submit" value="更新" class="btn btn-primary" name="btn"/>
+    <input type="submit" value="削除" class="btn btn-primary btn2" name="btn"/>
+    <input type="submit" value="1日の作業内容詳細" class="btn btn-primary btn3" name="btn"/>
+
+</form>
+<form asp-action="index" name="back_kintai">
+<!--CSRF-->
+<input type="hidden" name="loginhoji" value=1>
+<a href="javascript:back_kintai.submit()" style="text-decoration: none">戻る</a>
+</form>
+
+<script>
+    function clearText1() {
+    var textForm = document.getElementsByClassName("form1a");
+    textForm[0].value = '';
+    textForm[1].value = '';
+    }
+
+    function clearText2() {
+    var textForm = document.getElementsByClassName("form1b");
+    textForm[0].value = '';
+    textForm[1].value = '';
+    }
+
+    function clearText3() {
+    var textForm = document.getElementsByClassName("form1c");
+    textForm[0].value = '';
+    textForm[1].value = '';
+    }
+
+    function clearText4() {
+    var textForm = document.getElementsByClassName("form1d");
+    textForm[0].value = '';
+    textForm[1].value = '';
+    }
+
+    function clearText5() {
+    var textForm = document.getElementsByClassName("form1e");
+    textForm[0].value = '';
+    textForm[1].value = '';
+    }
+</script>
+
+@section scripts {
+    <script>
+        document.getElementById("Kintai_Workstyle").addEventListener("change", function() {
+        var selectedValue = this.value; // 選択された値を取得
+        if(selectedValue == "勤務" || selectedValue == "遅刻" || selectedValue == "早退"
+        || selectedValue == "振替"){
+                var inputs = document.getElementById('Kintai_Starttime');
+                var inpute = document.getElementById('Kintai_Endtime');
+                var myModel = @Html.Raw(JsonConvert.SerializeObject(Model));
+                if (!inputs.value) {
+                    var date = new Date(myModel.Users.Kstarttime);
+                    inputs.value = date.toTimeString().slice(0, 5);
+                }
+                if (!inpute.value) {
+                    var date = new Date(myModel.Users.Kendtime);
+                    inpute.value = date.toTimeString().slice(0, 5);
+                }
+        }else if(selectedValue == "有休" || selectedValue == "代休"){
+                var formAll = document.getElementsByClassName("formAll");
+                for(let i=0; i < 10; i++){
+                    formAll[i].value = '';
+                }
+        }
+        });
+    </script>
+}

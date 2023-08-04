@@ -1,0 +1,371 @@
+@model Wing1.Models.Details
+
+@{
+    ViewData["Title"] = "作業詳細";
+}
+@{
+    var i = 1;
+}
+<style>
+    .form-control{
+        width: 200px;
+    }
+    span{
+        margin-top:7px
+    }
+    .form1{
+        margin-bottom: 10px;
+    }
+    .textarea1{
+        resize: none;
+        width: 600px;
+        min-height: 25px;
+        margin-left: 40px;
+        overflow: hidden;
+        background-color: #E9ECEF;
+        border: none;
+    }
+    .btn{
+        margin-left: 40px;
+    }
+    #message1{
+        color:#1b6ec2;
+        font-size: 20px;
+    }
+
+    .btndel1{
+        margin-left: 0px;
+        color:white;
+        border-color:#FF3300;
+        background-color: #FF3333;
+    }
+    .btndel1:hover{
+        color:white;
+        background-color: rgb(225, 8, 8);
+        border-color: rgb(225, 8, 8);
+    }
+    .btnadd1{
+        color:white;
+        border-color:#1b6ec2;
+        background-color: #1861ac;
+    }
+    .btnadd1:hover{
+        color:white;
+        background-color: rgb(20, 70, 158);
+        border-color: rgb(20, 70, 158);
+    }
+    #btngroup1{
+        margin-left: 48px;
+    }
+    .btnedit{
+        margin-left: 0px;
+        border-color:#9acd32;
+        background-color: #96cf23;
+    }
+    .btnedit:hover{
+        border-color:#9acd32;
+        background-color: #719627;
+    }
+    .grp1{
+        margin-left: 88px;
+    }
+    textarea:focus {
+        outline: none;
+    }
+    .testform1{
+        margin-left: 8px;
+    }
+
+
+</style>
+@ViewBag.date.ToString().Substring(0,4)年 @ViewBag.date.ToString().Substring(5,2)月
+@ViewBag.date.ToString().Substring(8,2)日
+<br><span style="color: #FF3300;">@ViewBag.message1</span>
+
+<form asp-action="Detail">
+    
+    
+    <input type="hidden" asp-for="Userid"/>
+    <input type="hidden" asp-for="Date"/>
+    @if(@Model.Starttime1 == null)
+    {
+    <div id="form1" class="form1a" style="display: none;">
+    <div style="display: flex;" class="form1">
+        <label><input type="checkbox" name="check" class="check" value="1"> 1　</label>
+        <input asp-for="Starttime1" class="form-control form1a" readonly/><span>～</span>
+        <input asp-for="Endtime1" class="form-control form1a" readonly/>
+    </div>
+    <textarea asp-for="Content1" class="textarea1" readonly></textarea>
+    </div>
+    }
+    else
+    {
+        <div id="form1" class="form1a">
+        <div style="display: flex;" class="form1">
+            <label><input type="checkbox" name="check" class="check" value="1"> 1　</label>
+            <input asp-for="Starttime1" class="form-control form1a" readonly/><span>～</span>
+            <input asp-for="Endtime1" class="form-control form1a" readonly/>
+        </div>
+        <textarea asp-for="Content1" class="textarea1" readonly></textarea>
+        </div>
+        i++;
+    }
+    @if(@Model.Starttime2 == null)
+    {
+        <div id="form2" style="display: none;">
+        <div style="display: flex;" class="form1">
+        <label><input type="checkbox" name="check" class="check" value="1"> 2　</label>
+        <input asp-for="Starttime2" class="form-control form1a" readonly/><span>～</span>
+        <input asp-for="Endtime2" class="form-control form1a" readonly/>
+        </div>
+        <textarea asp-for="Content2" class="textarea1" readonly></textarea>
+        </div>
+
+    }
+    else
+    {
+        <div id="form2"> 
+        <div style="display: flex;" class="form1">
+        <label><input type="checkbox" name="check" class="check" value="2"> 2　</label>
+        <input asp-for="Starttime2" class="form-control form1a" readonly/><span>～</span>
+        <input asp-for="Endtime2" class="form-control form1a" readonly/>
+        </div>
+        <textarea asp-for="Content2" class="textarea1" readonly></textarea>
+        </div>
+        i++;
+    }
+
+    @if(@Model.Starttime3 == null)
+    {
+    <div id="form3" style="display: none">
+    <div style="display: flex;" class="form1">
+        <label><input type="checkbox" name="check" class="check" value="3"> 3　</label>
+        <input asp-for="Starttime3" class="form-control form1a" readonly/><span>～</span>
+        <input asp-for="Endtime3" class="form-control form1a" readonly/>
+    </div>
+    <textarea asp-for="Content3" class="textarea1" readonly></textarea>
+    </div>
+    }else{
+    <div id="form3">
+    <div style="display: flex;" class="form1">
+        <label><input type="checkbox" name="check" class="check" value="3"> 3　</label>
+        <input asp-for="Starttime3" class="form-control form1a" readonly/><span>～</span>
+        <input asp-for="Endtime3" class="form-control form1a" readonly/>
+    </div>
+    <textarea asp-for="Content3" class="textarea1" readonly></textarea>
+    </div>
+    i++;
+    }
+
+    @if(@Model.Starttime4 == null)
+    {
+    <div id="form4" style="display: none">
+    <div style="display: flex;" class="form1">
+        <label><input type="checkbox" name="check" class="check" value="4"> 4　</label>
+        <input asp-for="Starttime4" class="form-control form1a" readonly/><span>～</span>
+        <input asp-for="Endtime4" class="form-control form1a" readonly/>
+    </div>
+    <textarea asp-for="Content4" class="textarea1" readonly></textarea>
+    </div>
+    }else{
+    <div id="form4">
+    <div style="display: flex;" class="form1">
+        <label><input type="checkbox" name="check" class="check" value="4"> 4　</label>
+        <input asp-for="Starttime4" class="form-control form1a" readonly/><span>～</span>
+        <input asp-for="Endtime4" class="form-control form1a" readonly/>
+    </div>
+    <textarea asp-for="Content4" class="textarea1" readonly></textarea>
+    </div>
+    i++;
+    }
+
+    @if(@Model.Starttime5 == null)
+    {
+    <div id="form5" style="display: none;">
+    <div style="display: flex;" class="form1">
+        <label><input type="checkbox" name="check" class="check" value="5"> 5　</label>
+        <input asp-for="Starttime5" class="form-control form1a" readonly/><span>～</span>
+        <input asp-for="Endtime5" class="form-control form1a" readonly/>
+    </div>
+    <textarea asp-for="Content5" class="textarea1" readonly></textarea>
+    </div>
+    }else{
+        <div id="form5">
+        <div style="display: flex;" class="form1">
+            <label><input type="checkbox" name="check" class="check" value="5"> 5　</label>
+            <input asp-for="Starttime5" class="form-control form1a" readonly/><span>～</span>
+            <input asp-for="Endtime5" class="form-control form1a" readonly/>
+        </div>
+        <textarea asp-for="Content5" class="textarea1" readonly></textarea>
+        </div>
+        i++;
+    }
+    
+    @if(@Model.Starttime6 == null)
+    {
+    <div id="form6" style="display: none;">
+    <div style="display: flex;" class="form1">
+        <label><input type="checkbox" name="check" class="check" value="6"> 6　</label>
+        <input asp-for="Starttime6" class="form-control form1a" readonly/><span>～</span>
+        <input asp-for="Endtime6" class="form-control form1a" readonly/>
+    </div>
+    <textarea asp-for="Content6" class="textarea1" readonly></textarea>
+    </div>
+    }else{
+        <div id="form6">
+        <div style="display: flex;" class="form1">
+            <label><input type="checkbox" name="check" class="check" value="6"> 6　</label>
+            <input asp-for="Starttime6" class="form-control form1a" readonly/><span>～</span>
+            <input asp-for="Endtime6" class="form-control form1a" readonly/>
+        </div>
+        <textarea asp-for="Content6" class="textarea1" readonly></textarea>
+        </div>
+        i++;
+    }
+
+    @if(@Model.Starttime7 == null)
+    {
+    <div id="form7" style="display: none;">
+    <div style="display: flex;" class="form1">
+        <label><input type="checkbox" name="check" class="check" value="7"> 7　</label>
+        <input asp-for="Starttime7" class="form-control form1a" readonly/><span>～</span>
+        <input asp-for="Endtime7" class="form-control form1a" readonly/>
+    </div>
+    <textarea asp-for="Content7" class="textarea1" readonly></textarea>
+    </div>
+    }else{
+        <div id="form7">
+        <div style="display: flex;" class="form1">
+            <label><input type="checkbox" name="check" class="check" value="7"> 7　</label>
+            <input asp-for="Starttime7" class="form-control form1a" readonly/><span>～</span>
+            <input asp-for="Endtime7" class="form-control form1a" readonly/>
+        </div>
+        <textarea asp-for="Content7" class="textarea1" readonly></textarea>
+        </div>
+        i++;
+    }
+
+    @if(@Model.Starttime8 == null)
+    {
+    <div id="form8" style="display: none;">
+    <div style="display: flex;" class="form1">
+        <label><input type="checkbox" name="check" class="check" value="8"> 8　</label>
+        <input asp-for="Starttime8" class="form-control form1a" readonly/><span>～</span>
+        <input asp-for="Endtime8" class="form-control form1a" readonly/>
+    </div>
+    <textarea asp-for="Content8" class="textarea1" readonly></textarea>
+    </div>
+    }else{
+        <div id="form8">
+        <div style="display: flex;" class="form1">
+            <label><input type="checkbox" name="check" class="check" value="8"> 8　</label>
+            <input asp-for="Starttime8" class="form-control form1a" readonly/><span>～</span>
+            <input asp-for="Endtime8" class="form-control form1a" readonly/>
+        </div>
+        <textarea asp-for="Content8" class="textarea1" readonly></textarea>
+        </div>
+        i++;
+    }
+
+    @if(@Model.Starttime9 == null)
+    {
+    <div id="form9" style="display: none;">
+    <div style="display: flex;" class="form1">
+        <label><input type="checkbox" name="check" class="check" value="9"> 9　</label>
+        <input asp-for="Starttime9" class="form-control form1a" readonly/><span>～</span>
+        <input asp-for="Endtime9" class="form-control form1a" readonly/>
+    </div>
+    <textarea asp-for="Content9" class="textarea1" readonly></textarea>
+    </div>
+    }else{
+        <div id="form9">
+        <div style="display: flex;" class="form1">
+            <label><input type="checkbox" name="check" class="check" value="9"> 9　</label>
+            <input asp-for="Starttime9" class="form-control form1a" readonly/><span>～</span>
+            <input asp-for="Endtime9" class="form-control form1a" readonly/>
+        </div>
+        <textarea asp-for="Content9" class="textarea1" readonly></textarea>
+        </div>
+        i++;
+    }
+
+    @if(@Model.Starttime10 == null)
+    {
+    <div id="form10" style="display: none;">
+    <div style="display: flex;" class="form1">
+        <label><input type="checkbox" name="check" class="check" value="10"> 10</label>
+        <input asp-for="Starttime10" class="form-control form1a" readonly/><span>～</span>
+        <input asp-for="Endtime10" class="form-control form1a" readonly/>
+    </div>
+    <textarea asp-for="Content10" class="textarea1" readonly></textarea>
+    </div>
+    }else{
+        <div id="form10">
+        <div style="display: flex;" class="form1">
+            <label><input type="checkbox" name="check" class="check" value="10"> 10</label>
+            <input asp-for="Starttime10" class="form-control form1a testform1" readonly/><span>～</span>
+            <input asp-for="Endtime10" class="form-control form1a" readonly/>
+        </div>
+        <textarea asp-for="Content10" class="textarea1" readonly></textarea>
+        </div>
+        i++;
+    }
+
+    </div>
+    <div id="btngroup1">
+    <input type="hidden" name="num" value="@i">
+    <input type="submit" id="btnadd" class="btnadd1 btn" name="btn" value="追加"/>
+    <input type="submit" id="btndel" class="btndel1 btn" name="btn" value="削除"/>
+    <input type="submit" value="編集" class="btn btn-primary btnedit" name="btn" />
+    </div>
+    
+</form>
+
+
+
+
+<div id="div1" class="grp1">
+<form asp-action="Edit" name="back_edit">
+<!--CSRF-->
+<input type="hidden" name="edithyoji" value="1">
+<a href="javascript:back_edit.submit()" style="text-decoration: none" >戻る</a>
+</form>
+<p id="message1">@ViewBag.message</p>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    //クリックイベントが発火した
+    $('#message1').fadeOut(3000);
+    
+
+    @* テキストエリア用 *@
+    window.addEventListener("DOMContentLoaded", () => {
+    // textareaタグを全て取得
+    const textareaEls = document.querySelectorAll(".textarea1");
+
+    textareaEls.forEach((textareaEl) => {
+        // デフォルト値としてスタイル属性を付与
+        textareaEl.setAttribute("style", `height: ${textareaEl.scrollHeight}px;`);
+        // inputイベントが発生するたびに関数呼び出し
+        textareaEl.addEventListener("input", setTextareaHeight);
+    });
+
+    // textareaの高さを計算して指定する関数
+    function setTextareaHeight() {
+        this.style.height = "auto";
+        this.style.height = `${this.scrollHeight}px`;
+    }
+    });
+
+//チェックボックスで1つしかチェックさせなくする
+$(function(){
+  $('.check').on('click', function() {
+    if ($(this).prop('checked')){
+      // 一旦全てをクリアして再チェックする
+      $('.check').prop('checked', false);
+      $(this).prop('checked', true);
+    }
+  });
+});
+  </script>

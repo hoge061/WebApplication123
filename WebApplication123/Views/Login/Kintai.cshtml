@@ -1,0 +1,179 @@
+@model Wing1.Models.ViewKintaiModel
+
+@{
+    ViewData["Title"] = "勤務表";
+}
+<style>
+    table,td,th{
+        border:1px solid #333; ;
+        border-collapse: collapse;
+    }
+    .form-control{
+        width: 200px;
+    }
+    .form1{
+        margin-bottom: 10px;
+    }
+    #div123{
+        display:flex;
+        flex-direction:column-reverse;
+    }
+</style>
+こんにちは、@Html.DisplayFor(model => model.Users.Username)さん
+@{
+    TimeSpan totalzangyo = TimeSpan.Parse("0:0:0");
+    TimeSpan totalkado = TimeSpan.Parse("0:0:0");
+}
+<div style="display: flex;">
+
+
+<a href="Login/UserSetting" style="text-decoration: none">設定</a>/
+<form asp-action="index" name="logout">
+<input type="hidden" name="logout" value=1>
+<a href="javascript:logout.submit()" style="text-decoration: none">ログアウト</a>
+</form>
+@if(@Model.Users.adminflag == 1){
+    <span>/</span><a href="Login/Admintop" style="text-decoration: none">管理者画面</a>
+}
+</div>
+
+<form asp-action="Index">
+    <input type="hidden" asp-for="Users.Userid"/>
+    <input type="hidden" asp-for="Users.Pass"/>
+    <input type="hidden" asp-for="Users.Username"/>
+    <input type="hidden" asp-for="Users.adminflag"/>
+</form>
+<h5>@ViewBag.year 年 @ViewBag.mon 月</h5>
+
+
+
+<div id="div123">
+<table id="tbl1" style="width: 600px;">
+    <thead><tr><th>日付</th><th>曜日</th><th>勤務形態</th><th>開始</th><th>終了</th><th>稼働時間</th><th>残業時間</th></tr></thead>
+    
+    <tbody>
+    @for(int i=1; i <= @ViewBag.dim; i++)
+    {
+        <tr id="retu-@i">
+        <td style="width: 50px;"><a asp-action="Edit" asp-route-id=@Model.Users.Userid asp-route-date=@i style="text-decoration: none">@i 日</a> </td>                
+        <td>(@ViewBag.array[@i-1].Date.ToString("ddd"))</td>
+        <td>@ViewBag.array[@i-1].Workstyle</td>
+        <td>
+            @if(ViewBag.array[@i-1].Starttime != null){
+                @ViewBag.array[@i-1].Starttime.TimeOfDay.ToString().Substring(0,5)
+                //Console.WriteLine(@ViewBag.array[@i-1].Starttime.GetType());
+            }
+        </td>
+        <td>
+            @if(ViewBag.array[@i-1].Endtime != null){
+                @ViewBag.array[@i-1].Endtime.TimeOfDay.ToString().Substring(0,5)
+            }
+        </td>
+        <td>
+            @if(ViewBag.array[@i-1].Starttime != null && ViewBag.array[@i-1].Endtime != null){
+                var time = @ViewBag.array[@i-1].Endtime.TimeOfDay - @ViewBag.array[@i-1].Starttime.TimeOfDay;
+                
+                if(@ViewBag.array[@i-1].Break1end != null && @ViewBag.array[@i-1].Break1start != null){
+                    var resttime = @ViewBag.array[@i-1].Break1end.TimeOfDay - @ViewBag.array[@i-1].Break1start.TimeOfDay;
+                    time = time - resttime;
+                }
+                if(@ViewBag.array[@i-1].Break2end != null && @ViewBag.array[@i-1].Break2start != null){
+                    var resttime = @ViewBag.array[@i-1].Break2end.TimeOfDay - @ViewBag.array[@i-1].Break2start.TimeOfDay;
+                    time = time - resttime;
+                }
+                if(@ViewBag.array[@i-1].Break3end != null && @ViewBag.array[@i-1].Break3start != null){
+                    var resttime = @ViewBag.array[@i-1].Break3end.TimeOfDay - @ViewBag.array[@i-1].Break3start.TimeOfDay;
+                    time = time - resttime;
+                }
+                if(@ViewBag.array[@i-1].Break4end != null && @ViewBag.array[@i-1].Break4start != null){
+                    var resttime = @ViewBag.array[@i-1].Break4end.TimeOfDay - @ViewBag.array[@i-1].Break4start.TimeOfDay;
+                    time = time - resttime;
+                }
+                totalkado += time;
+                            TimeSpan span = TimeSpan.Parse("0:0:0");
+                            if (time < span)
+                            {
+                                time = TimeSpan.Parse("1") + time;
+                            }
+                            //Console.WriteLine(Math.Floor(totalkado.TotalHours));
+                <span>@time.ToString().Substring(0,5)</span>
+            }
+        </td>
+        <td>
+            @if(ViewBag.array[@i-1].Starttime != null && ViewBag.array[@i-1].Endtime != null){
+                var time = @ViewBag.array[@i-1].Endtime.TimeOfDay - @ViewBag.array[@i-1].Starttime.TimeOfDay;
+                if(@ViewBag.array[@i-1].Break1end != null && @ViewBag.array[@i-1].Break1start != null){
+                    var resttime = @ViewBag.array[@i-1].Break1end.TimeOfDay - @ViewBag.array[@i-1].Break1start.TimeOfDay;
+                    time = time - resttime;
+                }
+                if(@ViewBag.array[@i-1].Break2end != null && @ViewBag.array[@i-1].Break2start != null){
+                    var resttime = @ViewBag.array[@i-1].Break2end.TimeOfDay - @ViewBag.array[@i-1].Break2start.TimeOfDay;
+                    time = time - resttime;
+                }
+                if(@ViewBag.array[@i-1].Break3end != null && @ViewBag.array[@i-1].Break3start != null){
+                    var resttime = @ViewBag.array[@i-1].Break3end.TimeOfDay - @ViewBag.array[@i-1].Break3start.TimeOfDay;
+                    time = time - resttime;
+                }
+                if(@ViewBag.array[@i-1].Break4end != null && @ViewBag.array[@i-1].Break4start != null){
+                    var resttime = @ViewBag.array[@i-1].Break4end.TimeOfDay - @ViewBag.array[@i-1].Break4start.TimeOfDay;
+                    time = time - resttime;
+                }
+                //var kihon = @Model.Users.Kendtime - @Model.Users.Kstarttime;
+                var zangyo = time - @Model.Users.Jitudo;
+                
+                TimeSpan span = TimeSpan.Parse("0:0:0");
+                if(zangyo <= span || zangyo == null){
+                    zangyo = span;
+                }
+                totalzangyo += zangyo;
+                
+                <span>@zangyo.ToString().Substring(0,5)</span>
+                
+            }
+            
+        </td>
+        </tr>
+            @if((@ViewBag.array[@i-1].Date.ToString("ddd")) == "土"){
+            <script>
+                tr = document.querySelector("#retu-@i");
+                tr.setAttribute("style","background-color:#b0c4de");
+            </script>
+            }else if((@ViewBag.array[@i-1].Date.ToString("ddd")) == "日"){
+            <script>
+                tr = document.querySelector("#retu-@i");
+                tr.setAttribute("style","background-color:#ffa07a");
+            </script>
+            }
+    }
+    </tbody>
+</table>
+
+<div style="display: flex;">
+<form asp-action="index" name="back_kintai">
+<!--CSRF-->
+<input type="hidden" name="backmon" value=-1>
+<a href="javascript:back_kintai.submit()" style="text-decoration: none">前の月</a>
+</form>
+/
+<form asp-action="index" name="next_kintai">
+<!--CSRF-->
+<input type="hidden" name="backmon" value=1>
+<a href="javascript:next_kintai.submit()" style="text-decoration: none">次の月</a>
+</form>
+</div>
+
+<form asp-action="index">
+<input type="submit" id="btnadd" class="btn-primary btn" name="btn" value="excelファイルのダウンロード"/>
+</form>
+
+@{
+    var test1 = Math.Floor(totalkado.TotalHours*100)/100;
+    var test2 =Math.Floor(totalzangyo.TotalHours*100)/100;
+}
+<div style="display: flex;">   
+<h6>月稼働時間： @test1 時間</h6>
+<h6>　月残業時間： @test2 時間</h6>
+
+</div>
+</div>
+

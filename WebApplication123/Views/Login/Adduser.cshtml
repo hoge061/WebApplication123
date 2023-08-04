@@ -1,0 +1,21 @@
+@model Wing1.Models.Users
+@{
+    ViewData["Title"] = "ユーザー追加";
+}
+
+<form asp-action="Adduser">
+    @Html.LabelFor(model => model.Userid)
+    @Html.TextBoxFor(model => model.Userid)<br>
+    @Html.LabelFor(model => model.Pass)
+    @Html.TextBoxFor(model => model.Pass)<br>
+    @Html.LabelFor(model => model.Username)
+    <input asp-for="Username"/><br>
+    @Html.LabelFor(model => model.Kstarttime)
+    <input asp-for="Kstarttime"/><br>
+    @Html.LabelFor(model => model.Kendtime)
+    <input asp-for="Kendtime"/><br>
+    <input type="submit" value="登録" class="btn-primary btn"><br>
+    <label style="color:#ff0000">@Html.ValidationSummary()</label>
+</form>
+@ViewBag.message1
+<a href="Admintop" style="text-decoration: none">戻る</a>

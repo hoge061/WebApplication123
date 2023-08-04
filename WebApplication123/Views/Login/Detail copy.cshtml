@@ -1,0 +1,271 @@
+@model Wing1.Models.Details
+
+@{
+    ViewData["Title"] = "作業詳細";
+}
+<style>
+    .form-control{
+        width: 200px;
+    }
+    span{
+        margin-top:7px
+    }
+    .form1{
+        margin-bottom: 10px;
+    }
+    .textarea1{
+        resize: none;
+        width: 600px;
+        min-height: 100px;
+        margin-left: 40px;
+        overflow: hidden;
+    }
+    .btn{
+        margin-left: 40px;
+    }
+    #message1{
+        color:#1b6ec2;
+        font-size: 20px;
+    }
+
+    .btndel1{
+        margin-left: 0px;
+        color:white;
+        border-color:#FF3300;
+        background-color: #FF3333;
+    }
+    .btndel1:hover{
+        color:white;
+        background-color: rgb(225, 8, 8);
+        border-color: rgb(225, 8, 8);
+    }
+    .btnadd1{
+        color:white;
+        border-color:#1b6ec2;
+        background-color: #1861ac;
+    }
+    .btnadd1:hover{
+        color:white;
+        background-color: rgb(20, 70, 158);
+        border-color: rgb(20, 70, 158);
+    }
+    #btngroup1{
+        margin-left: 48px;
+    }
+    .grp1{
+        margin-left: 88px;
+    }
+
+
+</style>
+
+<form asp-action="Detail">
+    
+    
+    <input type="hidden" asp-for="Userid"/>
+    <input type="hidden" asp-for="Date"/>
+    @if(@Model.Starttime1 == null)
+    {
+    <div id="form1" class="form1a" style="display: none;">
+    <div style="display: flex;" class="form1">
+        <span>1　：</span>
+        <input asp-for="Starttime1" class="form-control form1a" readonly/><span>～</span>
+        <input asp-for="Endtime1" class="form-control form1a" readonly/>
+    </div>
+    <textarea asp-for="Content1" class="textarea1" readonly></textarea>
+    </div>
+    }
+    else
+    {
+        <div id="form1" class="form1a">
+        <div style="display: flex;" class="form1">
+            <span>1　：</span>
+            <input asp-for="Starttime1" class="form-control form1a" readonly/><span>～</span>
+            <input asp-for="Endtime1" class="form-control form1a" readonly/>
+        </div>
+        <textarea asp-for="Content1" class="textarea1" readonly></textarea>
+        </div>
+    }
+    @if(@Model.Starttime2 == null)
+    {
+        <div id="form2" style="display: none;">
+        <div style="display: flex;" class="form1">
+        <span>2　：</span>
+        <input asp-for="Starttime2" class="form-control form1a" readonly/><span>～</span>
+        <input asp-for="Endtime2" class="form-control form1a" readonly/>
+        </div>
+        <textarea asp-for="Content2" class="textarea1" readonly></textarea>
+        </div>
+
+    }
+    else
+    {
+        <div id="form2"> 
+        <div style="display: flex;" class="form1">
+        <span>2　：</span>
+        <input asp-for="Starttime2" class="form-control form1a" readonly/><span>～</span>
+        <input asp-for="Endtime2" class="form-control form1a" readonly/>
+        </div>
+        <textarea asp-for="Content2" class="textarea1" readonly></textarea>
+        </div>
+    }
+
+    @if(@Model.Starttime3 == null)
+    {
+    <div id="form3" style="display: none">
+    <div style="display: flex;" class="form1">
+        <span>3　：</span>
+        <input asp-for="Starttime3" class="form-control form1a"/><span>～</span>
+        <input asp-for="Endtime3" class="form-control form1a" />
+    </div>
+    <textarea asp-for="Content3" class="textarea1"></textarea>
+    </div>
+    }else{
+    <div id="form3">
+    <div style="display: flex;" class="form1">
+        <span>3　：</span>
+        <input asp-for="Starttime3" class="form-control form1a"/><span>～</span>
+        <input asp-for="Endtime3" class="form-control form1a" />
+    </div>
+    <textarea asp-for="Content3" class="textarea1"></textarea>
+    </div>
+    }
+
+    @if(@Model.Starttime4 == null)
+    {
+    <div id="form4" style="display: none">
+    <div style="display: flex;" class="form1">
+        <span>4　：</span>
+        <input asp-for="Starttime4" class="form-control form1a"/><span>～</span>
+        <input asp-for="Endtime4" class="form-control form1a" />
+    </div>
+    <textarea asp-for="Content4" class="textarea1"></textarea>
+    </div>
+    }else{
+    <div id="form4">
+    <div style="display: flex;" class="form1">
+        <span>4　：</span>
+        <input asp-for="Starttime4" class="form-control form1a"/><span>～</span>
+        <input asp-for="Endtime4" class="form-control form1a" />
+    </div>
+    <textarea asp-for="Content4" class="textarea1"></textarea>
+    </div>
+    }
+
+    @if(@Model.Starttime5 == null)
+    {
+    <div id="form5" style="display: none;">
+    <div style="display: flex;" class="form1">
+        <span>5　：</span>
+        <input asp-for="Starttime5" class="form-control form1a"/><span>～</span>
+        <input asp-for="Endtime5" class="form-control form1a" />
+    </div>
+    <textarea asp-for="Content5" class="textarea1"></textarea>
+    </div>
+    }else{
+        <div id="form5">
+        <div style="display: flex;" class="form1">
+            <span>5　：</span>
+            <input asp-for="Starttime5" class="form-control form1a"/><span>～</span>
+            <input asp-for="Endtime5" class="form-control form1a" />
+        </div>
+        <textarea asp-for="Content5" class="textarea1"></textarea>
+        </div>
+    }
+    
+
+</div>
+    <div id="btngroup1" class="grp1">
+    <button type="button" id="btnadd" class="btnadd1 btn">追加</button>
+    <button type="button" id="btndel" class="btndel1 btn">削除</button>
+    </div>
+    <br><input type="submit" value="更新" class="btn btn-primary grp1" name="btn" />
+</form>
+
+
+
+
+<div id="div1" class="grp1">
+<form asp-action="Edit" name="back_edit">
+<!--CSRF-->
+<input type="hidden" name="edithyoji" value="1">
+<a href="javascript:back_edit.submit()" style="text-decoration: none" >戻る</a>
+</form>
+<p id="message1">@ViewBag.message</p>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    //クリックイベントが発火した
+    $('#message1').fadeOut(3000);
+    //ボタン要素を取得
+    let switchBtn1 = document.getElementById('btnadd');
+    let switchBtn2 = document.getElementById('btndel');
+
+
+    let i=1;
+
+    for(i; i<=5; i++){
+        let element = document.getElementById('form'+i);
+
+        let style = window.getComputedStyle(element);
+        let value = style.getPropertyValue('display');
+        //console.log(value);
+        if(value == "none") break;
+    }
+    //console.log(i);
+    var k = i;
+    //let i = 2;
+
+    //styleのdisplayを変更する関数
+    let changeElement1 = (el)=> {
+            el.style.display='';
+    }
+
+    let changeElement2 = (el)=> {
+            el.style.display='none';
+            //el.reset();
+            el.lastChild.previousSibling.value = "";
+            el.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.value = "";
+            el.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.value="";
+            el.lastChild.previousSibling.style.height = "100px";
+            //console.log(el.firstChild.nextSibling.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.value);
+            //el.value = "";
+    }    
+
+    //上記関数をボタンクリック時に実行
+    switchBtn1.addEventListener('click', ()=> {
+    let box = document.getElementById('form'+i);
+    //console.log(i);
+    if(i < 6){
+        i++;
+        changeElement1(box);
+    }
+    }, false);
+
+    switchBtn2.addEventListener('click', ()=> {
+    //console.log(i);
+    if(i > 1)i--;
+    let box = document.getElementById('form'+i);    
+    changeElement2(box);
+    }, false);
+
+    @* テキストエリア用 *@
+    window.addEventListener("DOMContentLoaded", () => {
+    // textareaタグを全て取得
+    const textareaEls = document.querySelectorAll(".textarea1");
+
+    textareaEls.forEach((textareaEl) => {
+        // デフォルト値としてスタイル属性を付与
+        textareaEl.setAttribute("style", `height: ${textareaEl.scrollHeight}px;`);
+        // inputイベントが発生するたびに関数呼び出し
+        textareaEl.addEventListener("input", setTextareaHeight);
+    });
+
+    // textareaの高さを計算して指定する関数
+    function setTextareaHeight() {
+        this.style.height = "auto";
+        this.style.height = `${this.scrollHeight}px`;
+    }
+    });
+  </script>

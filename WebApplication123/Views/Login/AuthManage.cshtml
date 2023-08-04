@@ -1,0 +1,33 @@
+@model List<Users>
+@{
+    ViewData["Title"] = "権限管理";
+}
+<style>
+    table,td,th{
+        border:1px solid #333; ;
+        border-collapse: collapse;
+    }
+    table tr:nth-child(even) {
+        background-color: #dcdcdc;
+    }
+</style>
+<form asp-action="AuthManage">
+<table>
+    <thead><tr style="background-color: #dcdcdc;"><th>ユーザID</th><th>名前</th><th>管理者権限</th></thead>
+@foreach(var item in Model){
+    <tr>
+        <td style="width:80px">@item.Userid</td>
+        <td style="width:80px">@item.Username</td>
+        <td>
+            @if(item.adminflag == 1){
+                <input type="checkbox" name="checkad" checked value="@item.Userid">
+            }else{
+                <input type="checkbox" name="checkad" value="@item.Userid">
+            }
+        </td>
+    </tr>
+}
+</table>
+<input type="submit" value="変更" class="btn-primary btn">
+</form>
+<a href="Admintop" style="text-decoration: none" >戻る</a>

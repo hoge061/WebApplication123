@@ -1,0 +1,34 @@
+@model Wing1.Models.Users
+
+@{
+    ViewData["Title"] = "設定";
+}
+
+<style>
+    .form-control{
+        width: 200px;
+    }
+    .form1{
+        margin-bottom: 10px;
+    }
+    span{
+        margin-top:7px;
+    }
+</style>
+
+<form asp-action="UserSetting">
+<div style="display: flex;" class="form1">
+<span>基本勤務時間　：</span>
+<input asp-for="Kstarttime" class="form-control form1a"/><span>～</span>
+<input asp-for="Kendtime" class="form-control form1a" />
+</div>
+<span>残業開始時間　：</span>
+<input type="number" min="0" max="24" name="hour" value="@ViewBag.hour">時間<input type="number" min="0" max="45" step="15" name="minute" value="@ViewBag.minute">分を超過した勤務については残業としてカウントする
+<br><input type="submit" value="変更" class="btn btn-primary" name="btn"/>
+</form>
+
+<form asp-action="Index" name="back_edit">
+<!--CSRF-->
+<input type="hidden" name="edithyoji" value="1">
+<a href="javascript:back_edit.submit()" style="text-decoration: none" >戻る</a>
+</form>

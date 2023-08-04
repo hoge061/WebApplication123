@@ -1,0 +1,35 @@
+@model Wing1.Models.Users
+@{
+    ViewData["Title"] = "ログインページ";
+}
+<style>
+div{
+    margin-top: 300px;
+    width: 450px;
+    margin: auto;
+}
+#Userid{
+    margin-bottom: 10px;
+}
+#Pass{
+    margin-left: 4px;
+}
+.btn{
+    margin-top: 3px;
+    margin-left:180px;
+}
+
+</style>
+<div>
+<form asp-action="index">
+@Html.LabelFor(model => model.Userid)
+@Html.TextBoxFor(model => model.Userid)<br>
+@Html.LabelFor(model => model.Pass)
+@Html.PasswordFor(model => model.Pass)<br>
+<input type="submit" value="ログイン" class="btn-primary btn">
+<br>
+<label style="color:#ff0000">@Html.ValidationMessageFor(m => m.Userid)</label><br>
+<label style="color:#ff0000">@Html.ValidationMessageFor(m => m.Pass)</label>
+<label style="color:#ff0000">@Html.ValidationMessage("Error1")</label>
+</form>
+</div>

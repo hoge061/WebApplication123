@@ -1,0 +1,46 @@
+@model List<Users>
+@{
+    ViewData["Title"] = "管理トップ";
+}
+<style>
+    table,td,th{
+        border:1px solid #333; ;
+        border-collapse: collapse;
+    }
+    table tr:nth-child(even) {
+        background-color: #dcdcdc;
+    }
+</style>
+
+<a href="Adduser" style="text-decoration: none">新規ユーザー追加</a>/
+<a href="AuthManage" style="text-decoration: none">権限管理</a>
+
+<h5>@ViewBag.year 年 @ViewBag.mon 月</h5>
+
+<div style="display: flex;">
+<form asp-action="Admintop" name="back_kintai">
+<input type="hidden" name="backmon" value=-1>
+<a href="javascript:back_kintai.submit()" style="text-decoration: none">前の月</a>
+</form>
+/
+<form asp-action="Admintop" name="next_kintai">
+<input type="hidden" name="backmon" value=1>
+<a href="javascript:next_kintai.submit()" style="text-decoration: none">次の月</a>
+</form>
+</div>
+<table>
+    <thead><tr style="background-color: #dcdcdc;"><th>ユーザID</th><th>名前</th><th>総稼働時間</th><th>総残業時間</th></tr></thead>
+@foreach (var item in Model){
+    <tr>
+        <td style="width:80px">@item.Userid</td>
+        <td style="width:80px">@item.Username</td>
+        <td style="text-align: right; width:100px">@ViewBag.timeList[@item.Userid][0]</td>
+        <td style="text-align: right; width:100px">@ViewBag.timeList[@item.Userid][1]</td>
+    </tr>
+}
+</table>
+
+<form asp-action="Index" name="back_edit">
+<input type="hidden" name="edithyoji" value="1">
+<a href="javascript:back_edit.submit()" style="text-decoration: none" >戻る</a>
+</form>
