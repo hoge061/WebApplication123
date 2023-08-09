@@ -55,7 +55,7 @@ public class LoginController : Controller
         string referer = Request.Headers["Referer"].ToString();
         
         
-        if((string.IsNullOrEmpty(model.Userid) && referer != "https://192.168.0.5:7257/") 
+        if((string.IsNullOrEmpty(model.Userid) && referer != "http://localhost:5059/") 
         || ((Request.Form["backmon"] == "-1" || Request.Form["backmon"] == "1") && string.IsNullOrEmpty(model.Userid))
         || referer.Length >= 34
         || Request.Form["home"] == "1"){
@@ -156,7 +156,7 @@ public class LoginController : Controller
     }
     public async Task<IActionResult> Edit(string id,int date,Users model){   
         string referer = Request.Headers["Referer"].ToString();
-        if(referer != "https://192.168.0.5:7257/"){
+        if(referer != "http://localhost:5059/"){
             return View("Error");
         }
         var moni1 = HttpContext.Session.GetObject<int>("moni");
@@ -223,12 +223,12 @@ public class LoginController : Controller
         Console.WriteLine("確認:"+referer.Substring(0, 36));
         try{
             if(string.IsNullOrEmpty(referer) ||
-            (referer.Substring(0,36) != "https://192.168.0.5:7257/Login/Edit/" && (referer.Substring(0,41) != "https://192.168.0.5:7257/Login/DetailEdit")))
+            (referer.Substring(0,33) != "http://localhost:5059/Login/Edit/" && (referer.Substring(0,35) != "http://localhost:5059/Login/DetailEdit")))
             {
                 return View("Error");
             }
         }catch(ArgumentOutOfRangeException e){
-            if(referer != "https://192.168.0.5:7257/Login/Detail"){
+            if(referer != "http://localhost:5059/Login/Detail"){
                 return View("Error");
             }
         }
@@ -460,8 +460,8 @@ public class LoginController : Controller
     public async Task<IActionResult> Admintop()
     {
         string referer = Request.Headers["Referer"].ToString();
-        if(referer != "https://192.168.0.5:7257/" && referer != "https://192.168.0.5:7257/Login/Adduser"
-        && referer != "https://192.168.0.5:7257/Login/Admintop" && referer != "https://192.168.0.5:7257/Login/AuthManage"){
+        if(referer != "http://localhost:5059/" && referer != "http://localhost:5059/Login/Adduser"
+        && referer != "http://localhost:5059/Login/Admintop" && referer != "http://localhost:5059/Login/AuthManage"){
             return View("Error");
         }
 
@@ -547,10 +547,10 @@ public class LoginController : Controller
         public IActionResult Adduser()
     {
         string referer = Request.Headers["Referer"].ToString();
-        if(referer != "https://192.168.0.5:7257/Login/Admintop" && referer != "https://192.168.0.5:7257/Login/Adduser"){
+        if(referer != "http://localhost:5059/Login/Admintop" && referer != "http://localhost:5059/Login/Adduser"){
             return View("Error");
         }
-        if(referer == "https://192.168.0.5:7257/Login/Adduser"){
+        if(referer == "http://localhost:5059/Login/Adduser"){
             ViewBag.message1 = "登録完了しました。";
         }
         return View();
@@ -760,7 +760,7 @@ public class LoginController : Controller
 
     public async Task<IActionResult> UserSetting(){
         string referer = Request.Headers["Referer"].ToString();
-        if(referer != "https://192.168.0.5:7257/"){
+        if(referer != "http://localhost:5059/"){
             return View("Error");
         }
         var user = HttpContext.Session.GetObject<Users>("user");
